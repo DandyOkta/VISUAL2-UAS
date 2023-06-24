@@ -258,6 +258,7 @@ object Form1: TForm1
     Top = 328
     Width = 673
     Height = 169
+    DataSource = ds1
     TabOrder = 19
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -266,10 +267,15 @@ object Form1: TForm1
     TitleFont.Style = []
   end
   object ds1: TDataSource
+    DataSet = zqry1
     Left = 800
     Top = 40
   end
   object zqry1: TZQuery
+    Connection = con1
+    Active = True
+    SQL.Strings = (
+      'select * from siswa')
     Params = <>
     Left = 800
     Top = 96
@@ -278,7 +284,13 @@ object Form1: TForm1
     ControlsCodePage = cGET_ACP
     UTF8StringsAsWideField = False
     AutoEncodeStrings = False
-    Port = 0
+    Connected = True
+    HostName = 'localhost'
+    Port = 3307
+    Database = 'db_siswa'
+    User = 'root'
+    Protocol = 'mysql-5'
+    LibraryLocation = 'D:\VISUAL_2_Projek\UAS\libmysql.dll'
     Left = 800
     Top = 152
   end
