@@ -1,9 +1,9 @@
 object Form1: TForm1
-  Left = 204
-  Top = 142
+  Left = 182
+  Top = 98
   Width = 865
-  Height = 560
-  Caption = 'Form1'
+  Height = 556
+  Caption = 'FormSISWA'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -163,6 +163,9 @@ object Form1: TForm1
     Height = 21
     ItemHeight = 13
     TabOrder = 6
+    Items.Strings = (
+      'L'
+      'P')
   end
   object edt6: TEdit
     Left = 504
@@ -178,6 +181,9 @@ object Form1: TForm1
     Height = 21
     ItemHeight = 13
     TabOrder = 8
+    Items.Strings = (
+      'TKJ'
+      'DPIB')
   end
   object edt7: TEdit
     Left = 504
@@ -230,6 +236,7 @@ object Form1: TForm1
     Height = 41
     Caption = 'SIMPAN'
     TabOrder = 15
+    OnClick = btn2Click
   end
   object btn3: TButton
     Left = 384
@@ -275,7 +282,6 @@ object Form1: TForm1
   end
   object zqry1: TZQuery
     Connection = con1
-    Active = True
     SQL.Strings = (
       'select * from siswa')
     Params = <>
@@ -286,7 +292,6 @@ object Form1: TForm1
     ControlsCodePage = cGET_ACP
     UTF8StringsAsWideField = False
     AutoEncodeStrings = False
-    Connected = True
     HostName = 'localhost'
     Port = 3307
     Database = 'db_siswa'

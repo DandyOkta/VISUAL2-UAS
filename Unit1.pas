@@ -50,6 +50,7 @@ type
     procedure bersih;
     procedure FormCreate(Sender: TObject);
     procedure btn1Click(Sender: TObject);
+    procedure btn2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -125,6 +126,65 @@ edt10.Enabled:=True;
 dtp1.Enabled:=True;
 cbb1.Enabled:=True;
 cbb2.Enabled:=True;
+end;
+
+procedure TForm1.btn2Click(Sender: TObject);
+begin
+if edt1.Text ='' then
+begin
+  ShowMessage('ID KOSONG');
+end else
+if edt2.Text ='' then
+begin
+  ShowMessage('NISN KOSONG');
+end else
+if edt3.Text ='' then
+begin
+  ShowMessage('NAMA KOSONG');
+end else
+if edt4.Text ='' then
+begin
+  ShowMessage('NIK KOSONG');
+end else
+if edt5.Text ='' then
+begin
+  ShowMessage('TEMPAT LAHIR KOSONG');
+end else
+if edt6.Text ='' then
+begin
+  ShowMessage('TINGKAT KELAS KOSONG');
+end else
+if edt7.Text ='' then
+begin
+  ShowMessage('WALI KELAS KOSONG');
+end else
+if edt8.Text ='' then
+begin
+  ShowMessage('ALAMAT KOSONG');
+end else
+if edt9.Text ='' then
+begin
+  ShowMessage('NO TELEPON KOSONG');
+end else
+if edt10.Text ='' then
+begin
+  ShowMessage('NO HP KOSONG');
+end else
+if edt11.Text ='' then
+begin
+  ShowMessage('STATUS KOSONG');
+end else
+begin
+zqry1.SQL.Clear;
+zqry1.SQL.Add('insert into siswa values("'+edt1.Text+'","'+edt2.Text+'","'+edt3.Text+'","'+edt4.Text+'","'+edt5.Text+'","'+dtp1.Format+'","'+cbb1.Text+'","'+edt6.Text+'","'+cbb2.Text+'","'+edt7.Text+'","'+edt8.Text+'","'+edt9.Text+'","'+edt10.Text+'","'+edt11.Text+'")');
+zqry1.ExecSQL;
+
+zqry1.SQL.Clear;
+zqry1.SQL.Add('select * from siswa');
+zqry1.Open;
+ShowMessage('DATA BERHASIL DISIMPAN!');
+posisiawal;
+end;
 end;
 
 end.
