@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ZAbstractConnection, ZConnection, DB, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset, Grids, DBGrids, StdCtrls, ComCtrls;
+  ZAbstractDataset, ZDataset, Grids, DBGrids, StdCtrls, ComCtrls, frxClass,
+  frxDBSet;
 
 type
   TForm1 = class(TForm)
@@ -46,11 +47,19 @@ type
     dbgrd1: TDBGrid;
     zqry1: TZQuery;
     con1: TZConnection;
+    frxdbsiswa: TfrxDBDataset;
+    frxsiswa: TfrxReport;
+    btn6: TButton;
     procedure posisiawal;
     procedure bersih;
     procedure FormCreate(Sender: TObject);
     procedure btn1Click(Sender: TObject);
     procedure btn2Click(Sender: TObject);
+    procedure btn3Click(Sender: TObject);
+    procedure dbgrd1CellClick(Column: TColumn);
+    procedure btn4Click(Sender: TObject);
+    procedure btn5Click(Sender: TObject);
+    procedure btn6Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -59,7 +68,7 @@ type
 
 var
   Form1: TForm1;
-
+  idsiswa : string;
 implementation
 
 {$R *.dfm}
@@ -85,6 +94,7 @@ btn2.Enabled:=False;
 btn3.Enabled:=False;
 btn4.Enabled:=False;
 btn5.Enabled:=False;
+btn6.Enabled:=False;
 edt1.Enabled:=False;
 edt2.Enabled:=False;
 edt3.Enabled:=False;
@@ -113,6 +123,7 @@ btn2.Enabled:=True;
 btn3.Enabled:=False;
 btn4.Enabled:=False;
 btn5.Enabled:=True;
+btn6.enabled:=True;
 edt1.Enabled:=True;
 edt2.Enabled:=True;
 edt3.Enabled:=True;
@@ -176,7 +187,7 @@ begin
 end else
 begin
 zqry1.SQL.Clear;
-zqry1.SQL.Add('insert into siswa values("'+edt1.Text+'","'+edt2.Text+'","'+edt3.Text+'","'+edt4.Text+'","'+edt5.Text+'","'+dtp1.Format+'","'+cbb1.Text+'","'+edt6.Text+'","'+cbb2.Text+'","'+edt7.Text+'","'+edt8.Text+'","'+edt9.Text+'","'+edt10.Text+'","'+edt11.Text+'")');
+zqry1.SQL.Add('insert into siswa values("'+edt1.Text+'","'+edt2.Text+'","'+edt3.Text+'","'+edt4.Text+'","'+edt5.Text+'","'+FormatDateTime('yyyy/mm/dd',dtp1.Date)+'","'+cbb1.Text+'","'+edt6.Text+'","'+cbb2.Text+'","'+edt7.Text+'","'+edt8.Text+'","'+edt9.Text+'","'+edt10.Text+'","'+edt11.Text+'")');
 zqry1.ExecSQL;
 
 zqry1.SQL.Clear;
@@ -185,6 +196,96 @@ zqry1.Open;
 ShowMessage('DATA BERHASIL DISIMPAN!');
 posisiawal;
 end;
+end;
+
+procedure TForm1.btn3Click(Sender: TObject);
+begin
+if(edt1.Text='') or (edt2.Text='') or (edt3.Text='') or (edt4.Text='') or (edt5.Text='') then
+begin
+  ShowMessage('INPUTAN WAJIB DIISI');
+end else
+if edt2.Text = zqry1.Fields[1].AsString then
+begin
+  ShowMessage('DATA TIDAK ADA PERUBAHAN');
+  posisiawal;
+end else
+begin
+  ShowMessage('Data Berhasil Diupdate');
+zqry1.SQL.Clear;
+zqry1.SQL.Add('Update siswa set id="'+edt1.text+'",nis="'+edt2.Text+'",nama_siswa="'+edt3.Text+'",nik="'+edt4.Text+'",tempat_lahir="'+edt5.Text+'",tanggal_lahir="'+FormatDateTime('yyyy/mm/dd',dtp1.Date)+'",jenis_kelamin="'+cbb1.Text+'",tingkat_kelas="'+edt6.Text+'",jurusan="'+cbb2.text+'",wali_kelas="'+edt7.Text+'",alamat="'+edt8.Text+'",telp="'+edt9.Text+'",hp="'+edt10.Text+'",status="'+edt11.Text+'"where id = "'+edt1.text+'"');
+zqry1.ExecSQL;
+
+zqry1.SQL.Clear;
+zqry1.SQL.Add('select * from siswa');
+zqry1.Open;
+posisiawal;
+end;
+end;
+procedure TForm1.dbgrd1CellClick(Column: TColumn);
+begin
+edt1.Text:=zqry1.Fields[0].AsString;
+edt2.Text:=zqry1.Fields[1].AsString;
+edt3.Text:=zqry1.Fields[2].AsString;
+edt4.Text:=zqry1.Fields[3].AsString;
+edt5.Text:=zqry1.Fields[4].AsString;
+dtp1.Date:=zqry1.Fields[5].AsDateTime;
+cbb1.Text:=zqry1.Fields[6].AsString;
+edt6.Text:=zqry1.Fields[7].AsString;
+cbb2.Text:=zqry1.Fields[8].AsString;
+edt7.Text:=zqry1.Fields[9].AsString;
+edt8.Text:=zqry1.Fields[10].AsString;
+edt9.Text:=zqry1.Fields[11].AsString;
+edt10.Text:=zqry1.Fields[12].AsString;
+edt11.Text:=zqry1.Fields[13].AsString;
+
+edt1.Enabled:=True;
+edt2.Enabled:=True;
+edt3.Enabled:=True;
+edt4.Enabled:=True;
+edt5.Enabled:=True;
+edt6.Enabled:=True;
+edt7.Enabled:=True;
+edt8.Enabled:=True;
+edt9.Enabled:=True;
+edt10.Enabled:=True;
+edt11.Enabled:=True;
+cbb1.Enabled:=True;
+cbb2.Enabled:=True;
+dtp1.Enabled:=True;
+
+btn1.Enabled:=False;
+btn2.Enabled:=False;
+btn3.Enabled:=True;
+btn4.Enabled:=True;
+btn5.Enabled:=True;
+end;
+
+procedure TForm1.btn4Click(Sender: TObject);
+begin
+if MessageDlg('APAKAH ANDA YAKIN INGIN MENGHAPUS DATA INI ?',mtWarning,[mbYes,mbNo],0)=mryes then
+begin
+zqry1.SQL.Clear;
+zqry1.SQL.Add('delete from siswa where id="'+edt1.Text+'"');
+zqry1.ExecSQL;
+zqry1.SQL.Clear;
+zqry1.SQL.Add('select * from siswa');
+zqry1.Open;
+ShowMessage('DATA BERHASIL DIHAPUS');
+posisiawal;
+end else
+begin
+  ShowMessage('DATA BATAL DIHAPUS');
+  posisiawal;
+end;
+end;
+procedure TForm1.btn5Click(Sender: TObject);
+begin
+posisiawal;
+end;
+
+procedure TForm1.btn6Click(Sender: TObject);
+begin
+frxsiswa.ShowReport();
 end;
 
 end.

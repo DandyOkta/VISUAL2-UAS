@@ -129,8 +129,9 @@ object Form6: TForm6
   end
   object zqry1: TZQuery
     Connection = con1
+    Active = True
     SQL.Strings = (
-      'select * from siswa')
+      'select * from hubungan')
     Params = <>
     Left = 552
     Top = 152
@@ -139,6 +140,7 @@ object Form6: TForm6
     ControlsCodePage = cGET_ACP
     UTF8StringsAsWideField = False
     AutoEncodeStrings = False
+    Connected = True
     HostName = 'localhost'
     Port = 3307
     Database = 'db_siswa'
