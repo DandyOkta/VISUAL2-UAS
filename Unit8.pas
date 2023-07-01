@@ -1,14 +1,14 @@
-unit Unit6;
+unit Unit8;
 
 interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ZAbstractConnection, ZConnection, DB, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset, Grids, DBGrids, StdCtrls, frxClass, frxDBSet;
+  ZAbstractDataset, ZDataset, StdCtrls, Grids, DBGrids, frxClass, frxDBSet;
 
 type
-  TForm6 = class(TForm)
+  TForm8 = class(TForm)
     lbl1: TLabel;
     lbl2: TLabel;
     lbl3: TLabel;
@@ -21,22 +21,22 @@ type
     btn4: TButton;
     btn5: TButton;
     dbgrd1: TDBGrid;
+    cbb1: TComboBox;
+    cbb2: TComboBox;
+    btn6: TButton;
     ds1: TDataSource;
     zqry1: TZQuery;
     con1: TZConnection;
-    cbb1: TComboBox;
-    cbb2: TComboBox;
-    frxdbHUBUNGAN: TfrxDBDataset;
-    frxHUBUNGAN: TfrxReport;
-    btn6: TButton;
+    frxdbUSER: TfrxDBDataset;
+    frxUSER: TfrxReport;
     procedure posisiawal;
     procedure bersih;
-    procedure FormCreate(Sender: TObject);
     procedure btn1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
     procedure btn2Click(Sender: TObject);
     procedure btn3Click(Sender: TObject);
-    procedure dbgrd1CellClick(Column: TColumn);
     procedure btn4Click(Sender: TObject);
+    procedure dbgrd1CellClick(Column: TColumn);
     procedure btn5Click(Sender: TObject);
     procedure btn6Click(Sender: TObject);
   private
@@ -46,15 +46,13 @@ type
   end;
 
 var
-  Form6: TForm6;
-  idhubungan : string;
+  Form8: TForm8;
+  iduser : string;
 implementation
 
 {$R *.dfm}
 
-{ TForm6 }
-
-procedure TForm6.bersih;
+procedure TForm8.bersih;
 begin
 edt1.Clear;
 edt2.Clear;
@@ -62,7 +60,7 @@ cbb1.Text:='';
 cbb2.Text:='';
 end;
 
-procedure TForm6.posisiawal;
+procedure TForm8.posisiawal;
 begin
 btn1.Enabled:=True;
 btn2.Enabled:=False;
@@ -75,12 +73,7 @@ cbb1.Enabled:=False;
 cbb2.Enabled:=False;
 end;
 
-procedure TForm6.FormCreate(Sender: TObject);
-begin
-posisiawal;
-end;
-
-procedure TForm6.btn1Click(Sender: TObject);
+procedure TForm8.btn1Click(Sender: TObject);
 begin
 bersih;
 btn1.Enabled:=False;
@@ -94,44 +87,49 @@ cbb1.Enabled:=True;
 cbb2.Enabled:=True;
 end;
 
-procedure TForm6.btn2Click(Sender: TObject);
+procedure TForm8.FormCreate(Sender: TObject);
+begin
+posisiawal;
+end;
+
+procedure TForm8.btn2Click(Sender: TObject);
 begin
 if edt1.Text ='' then
 begin
-  ShowMessage('ID SISWA KOSONG');
+  ShowMessage('NAMA USER KOSONG');
 end else
 if edt2.Text ='' then
 begin
-  ShowMessage('ID ORTU KOSONG');
+  ShowMessage('PASSWORD KOSONG');
 end else
 if cbb1.Text ='' then
 begin
-  ShowMessage('STATUS KOSONG');
+  ShowMessage('LEVEL BELUM DIPILIH');
 end else
 if cbb2.Text ='' then
 begin
-  ShowMessage('KETERANGAN KOSONG');
+  ShowMessage('STATUS BELUM DIPILIH');
 end else
 begin
 zqry1.SQL.Clear;
-zqry1.SQL.Add('insert into hubungan values(null,"'+edt1.Text+'","'+edt2.Text+'","'+cbb1.Text+'","'+cbb2.Text+'")');
+zqry1.SQL.Add('insert into user values(null,"'+edt1.Text+'","'+edt2.Text+'","'+cbb1.Text+'","'+cbb2.Text+'")');
 zqry1.ExecSQL;
 
 zqry1.SQL.Clear;
-zqry1.SQL.Add('select * from hubungan');
+zqry1.SQL.Add('select * from user');
 zqry1.Open;
 ShowMessage('DATA BERHASIL DISIMPAN!');
 posisiawal;
 end;
 end;
 
-procedure TForm6.btn3Click(Sender: TObject);
+procedure TForm8.btn3Click(Sender: TObject);
 begin
 if(edt1.Text='') or (edt2.Text='') or (cbb2.Text='') or (cbb2.Text='') then
 begin
   ShowMessage('INPUTAN WAJIB DIISI');
 end else
-if edt2.Text = zqry1.Fields[1].AsString then
+if edt1.Text = zqry1.Fields[1].AsString then
 begin
   ShowMessage('DATA TIDAK ADA PERUBAHAN');
   posisiawal;
@@ -139,19 +137,38 @@ end else
 begin
   ShowMessage('Data Berhasil Diupdate');
 zqry1.SQL.Clear;
-zqry1.SQL.Add('Update hubungan set siswa_id="'+edt1.Text+'",ortu_id="'+edt2.Text+'",status_hub_anak="'+cbb1.Text+'",keterangan="'+cbb2.Text+'" where id = "'+idhubungan+'"');
+zqry1.SQL.Add('Update user set nama="'+edt1.Text+'",password="'+edt2.Text+'",level="'+cbb1.Text+'",status="'+cbb2.Text+'" where id = "'+iduser+'"');
 zqry1.ExecSQL;
 
 zqry1.SQL.Clear;
-zqry1.SQL.Add('select * from hubungan');
+zqry1.SQL.Add('select * from user');
 zqry1.Open;
 posisiawal;
 end;
 end;
 
-procedure TForm6.dbgrd1CellClick(Column: TColumn);
+procedure TForm8.btn4Click(Sender: TObject);
 begin
-idhubungan:=zqry1.Fields[0].AsString;
+if MessageDlg('APAKAH ANDA YAKIN INGIN MENGHAPUS DATA INI ?',mtWarning,[mbYes,mbNo],0)=mryes then
+begin
+zqry1.SQL.Clear;
+zqry1.SQL.Add('delete from user where id="'+iduser+'"');
+zqry1.ExecSQL;
+zqry1.SQL.Clear;
+zqry1.SQL.Add('select * from user');
+zqry1.Open;
+ShowMessage('DATA BERHASIL DIHAPUS');
+posisiawal;
+end else
+begin
+  ShowMessage('DATA BATAL DIHAPUS');
+  posisiawal;
+end;
+end;
+
+procedure TForm8.dbgrd1CellClick(Column: TColumn);
+begin
+iduser:=zqry1.Fields[0].AsString;
 edt1.Text:=zqry1.Fields[1].AsString;
 edt2.Text:=zqry1.Fields[2].AsString;
 cbb1.Text:=zqry1.Fields[3].AsString;
@@ -169,33 +186,14 @@ btn4.Enabled:=True;
 btn5.Enabled:=True;
 end;
 
-procedure TForm6.btn4Click(Sender: TObject);
-begin
-if MessageDlg('APAKAH ANDA YAKIN INGIN MENGHAPUS DATA INI ?',mtWarning,[mbYes,mbNo],0)=mryes then
-begin
-zqry1.SQL.Clear;
-zqry1.SQL.Add('delete from hubungan where id="'+idhubungan+'"');
-zqry1.ExecSQL;
-zqry1.SQL.Clear;
-zqry1.SQL.Add('select * from hubungan');
-zqry1.Open;
-ShowMessage('DATA BERHASIL DIHAPUS');
-posisiawal;
-end else
-begin
-  ShowMessage('DATA BATAL DIHAPUS');
-  posisiawal;
-end;
-end;
-
-procedure TForm6.btn5Click(Sender: TObject);
+procedure TForm8.btn5Click(Sender: TObject);
 begin
 posisiawal;
 end;
 
-procedure TForm6.btn6Click(Sender: TObject);
+procedure TForm8.btn6Click(Sender: TObject);
 begin
-frxHUBUNGAN.ShowReport();
+frxUSER.ShowReport();
 end;
 
 end.

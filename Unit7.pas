@@ -1,14 +1,14 @@
-unit Unit6;
+unit Unit7;
 
 interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ZAbstractConnection, ZConnection, DB, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset, Grids, DBGrids, StdCtrls, frxClass, frxDBSet;
+  Dialogs, frxClass, frxDBSet, StdCtrls, ZAbstractConnection, ZConnection,
+  DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, Grids, DBGrids;
 
 type
-  TForm6 = class(TForm)
+  TForm7 = class(TForm)
     lbl1: TLabel;
     lbl2: TLabel;
     lbl3: TLabel;
@@ -26,17 +26,19 @@ type
     con1: TZConnection;
     cbb1: TComboBox;
     cbb2: TComboBox;
-    frxdbHUBUNGAN: TfrxDBDataset;
-    frxHUBUNGAN: TfrxReport;
     btn6: TButton;
+    edt3: TEdit;
+    lbl5: TLabel;
+    frxdbPOIN: TfrxDBDataset;
+    frxPOIN: TfrxReport;
     procedure posisiawal;
     procedure bersih;
-    procedure FormCreate(Sender: TObject);
     procedure btn1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
     procedure btn2Click(Sender: TObject);
     procedure btn3Click(Sender: TObject);
-    procedure dbgrd1CellClick(Column: TColumn);
     procedure btn4Click(Sender: TObject);
+    procedure dbgrd1CellClick(Column: TColumn);
     procedure btn5Click(Sender: TObject);
     procedure btn6Click(Sender: TObject);
   private
@@ -46,23 +48,24 @@ type
   end;
 
 var
-  Form6: TForm6;
-  idhubungan : string;
+  Form7: TForm7;
+
 implementation
 
 {$R *.dfm}
 
-{ TForm6 }
+{ TForm7 }
 
-procedure TForm6.bersih;
+procedure TForm7.bersih;
 begin
 edt1.Clear;
 edt2.Clear;
+edt3.Clear;
 cbb1.Text:='';
 cbb2.Text:='';
 end;
 
-procedure TForm6.posisiawal;
+procedure TForm7.posisiawal;
 begin
 btn1.Enabled:=True;
 btn2.Enabled:=False;
@@ -71,16 +74,12 @@ btn4.Enabled:=False;
 btn5.Enabled:=False;
 edt1.Enabled:=False;
 edt2.Enabled:=False;
+edt3.enabled:=False;
 cbb1.Enabled:=False;
 cbb2.Enabled:=False;
 end;
 
-procedure TForm6.FormCreate(Sender: TObject);
-begin
-posisiawal;
-end;
-
-procedure TForm6.btn1Click(Sender: TObject);
+procedure TForm7.btn1Click(Sender: TObject);
 begin
 bersih;
 btn1.Enabled:=False;
@@ -90,11 +89,17 @@ btn4.Enabled:=False;
 btn5.Enabled:=True;
 edt1.Enabled:=True;
 edt2.Enabled:=True;
+edt3.Enabled:=True;
 cbb1.Enabled:=True;
 cbb2.Enabled:=True;
 end;
 
-procedure TForm6.btn2Click(Sender: TObject);
+procedure TForm7.FormCreate(Sender: TObject);
+begin
+posisiawal;
+end;
+
+procedure TForm7.btn2Click(Sender: TObject);
 begin
 if edt1.Text ='' then
 begin
@@ -114,18 +119,18 @@ begin
 end else
 begin
 zqry1.SQL.Clear;
-zqry1.SQL.Add('insert into hubungan values(null,"'+edt1.Text+'","'+edt2.Text+'","'+cbb1.Text+'","'+cbb2.Text+'")');
+zqry1.SQL.Add('insert into poin values("'+edt1.Text+'","'+edt2.Text+'","'+edt3.Text+'","'+cbb1.Text+'","'+cbb2.Text+'")');
 zqry1.ExecSQL;
 
 zqry1.SQL.Clear;
-zqry1.SQL.Add('select * from hubungan');
+zqry1.SQL.Add('select * from poin');
 zqry1.Open;
 ShowMessage('DATA BERHASIL DISIMPAN!');
 posisiawal;
 end;
 end;
 
-procedure TForm6.btn3Click(Sender: TObject);
+procedure TForm7.btn3Click(Sender: TObject);
 begin
 if(edt1.Text='') or (edt2.Text='') or (cbb2.Text='') or (cbb2.Text='') then
 begin
@@ -139,45 +144,25 @@ end else
 begin
   ShowMessage('Data Berhasil Diupdate');
 zqry1.SQL.Clear;
-zqry1.SQL.Add('Update hubungan set siswa_id="'+edt1.Text+'",ortu_id="'+edt2.Text+'",status_hub_anak="'+cbb1.Text+'",keterangan="'+cbb2.Text+'" where id = "'+idhubungan+'"');
+zqry1.SQL.Add('Update poin set id="'+edt1.Text+'",nama="'+edt2.Text+'",bobot="'+edt3.Text+'",jenis="'+cbb1.Text+'",status="'+cbb2.Text+'" where id = "'+edt1.Text+'"');
 zqry1.ExecSQL;
 
 zqry1.SQL.Clear;
-zqry1.SQL.Add('select * from hubungan');
+zqry1.SQL.Add('select * from poin');
 zqry1.Open;
 posisiawal;
 end;
 end;
 
-procedure TForm6.dbgrd1CellClick(Column: TColumn);
-begin
-idhubungan:=zqry1.Fields[0].AsString;
-edt1.Text:=zqry1.Fields[1].AsString;
-edt2.Text:=zqry1.Fields[2].AsString;
-cbb1.Text:=zqry1.Fields[3].AsString;
-cbb2.Text:=zqry1.Fields[4].AsString;
-
-edt1.Enabled:=True;
-edt2.Enabled:=True;
-cbb1.enabled:=True;
-cbb2.Enabled:=True;
-
-btn1.Enabled:=False;
-btn2.Enabled:=False;
-btn3.Enabled:=True;
-btn4.Enabled:=True;
-btn5.Enabled:=True;
-end;
-
-procedure TForm6.btn4Click(Sender: TObject);
+procedure TForm7.btn4Click(Sender: TObject);
 begin
 if MessageDlg('APAKAH ANDA YAKIN INGIN MENGHAPUS DATA INI ?',mtWarning,[mbYes,mbNo],0)=mryes then
 begin
 zqry1.SQL.Clear;
-zqry1.SQL.Add('delete from hubungan where id="'+idhubungan+'"');
+zqry1.SQL.Add('delete from poin where id="'+edt1.Text+'"');
 zqry1.ExecSQL;
 zqry1.SQL.Clear;
-zqry1.SQL.Add('select * from hubungan');
+zqry1.SQL.Add('select * from poin');
 zqry1.Open;
 ShowMessage('DATA BERHASIL DIHAPUS');
 posisiawal;
@@ -188,14 +173,35 @@ begin
 end;
 end;
 
-procedure TForm6.btn5Click(Sender: TObject);
+procedure TForm7.dbgrd1CellClick(Column: TColumn);
+begin
+edt1.Text:=zqry1.Fields[0].AsString;
+edt2.Text:=zqry1.Fields[1].AsString;
+edt3.Text:=zqry1.Fields[2].AsString;
+cbb1.Text:=zqry1.Fields[3].AsString;
+cbb2.Text:=zqry1.Fields[4].AsString;
+
+edt1.Enabled:=True;
+edt2.Enabled:=True;
+edt3.Enabled:=True;
+cbb1.enabled:=True;
+cbb2.Enabled:=True;
+
+btn1.Enabled:=False;
+btn2.Enabled:=False;
+btn3.Enabled:=True;
+btn4.Enabled:=True;
+btn5.Enabled:=True;
+end;
+
+procedure TForm7.btn5Click(Sender: TObject);
 begin
 posisiawal;
 end;
 
-procedure TForm6.btn6Click(Sender: TObject);
+procedure TForm7.btn6Click(Sender: TObject);
 begin
-frxHUBUNGAN.ShowReport();
+frxPOIN.ShowReport();
 end;
 
 end.
