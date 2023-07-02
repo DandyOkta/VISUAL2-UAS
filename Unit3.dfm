@@ -145,7 +145,7 @@ object Form3: TForm3
     TabOrder = 7
   end
   object btn1: TButton
-    Left = 144
+    Left = 40
     Top = 192
     Width = 105
     Height = 41
@@ -154,7 +154,7 @@ object Form3: TForm3
     OnClick = btn1Click
   end
   object btn2: TButton
-    Left = 264
+    Left = 160
     Top = 192
     Width = 105
     Height = 41
@@ -163,7 +163,7 @@ object Form3: TForm3
     OnClick = btn2Click
   end
   object btn3: TButton
-    Left = 384
+    Left = 280
     Top = 192
     Width = 105
     Height = 41
@@ -172,7 +172,7 @@ object Form3: TForm3
     OnClick = btn3Click
   end
   object btn4: TButton
-    Left = 504
+    Left = 400
     Top = 192
     Width = 105
     Height = 41
@@ -181,7 +181,7 @@ object Form3: TForm3
     OnClick = btn4Click
   end
   object btn5: TButton
-    Left = 624
+    Left = 520
     Top = 192
     Width = 105
     Height = 41
@@ -190,9 +190,9 @@ object Form3: TForm3
     OnClick = btn5Click
   end
   object dbgrd1: TDBGrid
-    Left = 96
+    Left = 24
     Top = 250
-    Width = 673
+    Width = 745
     Height = 169
     DataSource = ds1
     TabOrder = 13
@@ -214,12 +214,25 @@ object Form3: TForm3
       'L'
       'P')
   end
-  object edt8: TEdit
+  object cbb3: TComboBox
     Left = 496
     Top = 152
     Width = 273
     Height = 21
+    ItemHeight = 13
     TabOrder = 15
+    Items.Strings = (
+      'Aktif '
+      'Tidak Aktif')
+  end
+  object btn6: TButton
+    Left = 640
+    Top = 192
+    Width = 105
+    Height = 41
+    Caption = 'SHOW REPORT'
+    TabOrder = 16
+    OnClick = btn6Click
   end
   object ds1: TDataSource
     DataSet = zqry1

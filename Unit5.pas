@@ -24,7 +24,6 @@ type
     edt4: TEdit;
     edt5: TEdit;
     edt6: TEdit;
-    edt7: TEdit;
     btn1: TButton;
     btn2: TButton;
     btn3: TButton;
@@ -38,6 +37,7 @@ type
     frxdbRIWAYAT: TfrxDBDataset;
     frxRIWAYAT: TfrxReport;
     btn6: TButton;
+    cbb1: TComboBox;
     procedure posisiawal;
     procedure bersih;
     procedure FormCreate(Sender: TObject);
@@ -69,7 +69,7 @@ edt3.Clear;
 edt4.Clear;
 edt5.Clear;
 edt6.Clear;
-edt7.Clear;
+cbb1.text:='';
 end;
 
 procedure TForm5.posisiawal;
@@ -85,8 +85,8 @@ edt3.Enabled:=False;
 edt4.Enabled:=False;
 edt5.Enabled:=False;
 edt6.Enabled:=False;
-edt7.Enabled:=False;
 dtp1.Enabled:=False;
+cbb1.enabled:=False;
 end;
 
 procedure TForm5.FormCreate(Sender: TObject);
@@ -108,7 +108,7 @@ edt3.Enabled:=True;
 edt4.Enabled:=True;
 edt5.Enabled:=True;
 edt6.Enabled:=True;
-edt7.Enabled:=True;
+cbb1.Enabled:=True;
 dtp1.Enabled:=True;
 end;
 
@@ -116,35 +116,35 @@ procedure TForm5.btn2Click(Sender: TObject);
 begin
 if edt1.Text ='' then
 begin
-  ShowMessage('ID KOSONG');
+  ShowMessage('ID SISWA KOSONG');
 end else
 if edt2.Text ='' then
 begin
-  ShowMessage('NISN KOSONG');
+  ShowMessage('ID POIN KOSONG');
 end else
 if edt3.Text ='' then
 begin
-  ShowMessage('NAMA KOSONG');
+  ShowMessage('ID WALI KOSONG');
 end else
 if edt4.Text ='' then
 begin
-  ShowMessage('NIK KOSONG');
+  ShowMessage('ID ORTU KOSONG');
 end else
 if edt5.Text ='' then
 begin
-  ShowMessage('TEMPAT LAHIR KOSONG');
+  ShowMessage('ID KELAS KOSONG');
 end else
 if edt6.Text ='' then
 begin
-  ShowMessage('TINGKAT KELAS KOSONG');
+  ShowMessage('SEMESTER KOSONG');
 end else
-if edt7.Text ='' then
+if cbb1.Text ='' then
 begin
-  ShowMessage('WALI KELAS KOSONG');
+  ShowMessage('STATUS TIDAK DIPILIH');
 end else
 begin
 zqry1.SQL.Clear;
-zqry1.SQL.Add('insert into riwayat_poin values(null,"'+edt1.Text+'","'+edt2.Text+'","'+edt3.Text+'","'+edt4.Text+'","'+edt5.Text+'","'+FormatDateTime('yyyy/mm/dd',dtp1.Date)+'","'+edt6.Text+'","'+edt7.Text+'")');
+zqry1.SQL.Add('insert into riwayat_poin values(null,"'+edt1.Text+'","'+edt2.Text+'","'+edt3.Text+'","'+edt4.Text+'","'+edt5.Text+'","'+FormatDateTime('yyyy/mm/dd',dtp1.Date)+'","'+edt6.Text+'","'+cbb1.Text+'")');
 zqry1.ExecSQL;
 
 zqry1.SQL.Clear;
@@ -169,7 +169,7 @@ end else
 begin
   ShowMessage('Data Berhasil Diupdate');
 zqry1.SQL.Clear;
-zqry1.SQL.Add('Update riwayat_poin set siswa_id="'+edt1.Text+'",poin_id="'+edt2.Text+'",wali_id="'+edt3.Text+'",ortu_id="'+edt4.Text+'",kelas_id="'+edt5.Text+'",tanggal="'+FormatDateTime('yyyy/mm/dd',dtp1.Date)+'",semester="'+edt6.Text+'",status="'+edt7.Text+'" where id = "'+idriwayat+'"');
+zqry1.SQL.Add('Update riwayat_poin set siswa_id="'+edt1.Text+'",poin_id="'+edt2.Text+'",wali_id="'+edt3.Text+'",ortu_id="'+edt4.Text+'",kelas_id="'+edt5.Text+'",tanggal="'+FormatDateTime('yyyy/mm/dd',dtp1.Date)+'",semester="'+edt6.Text+'",status="'+cbb1.Text+'" where id = "'+idriwayat+'"');
 zqry1.ExecSQL;
 
 zqry1.SQL.Clear;
@@ -189,7 +189,7 @@ edt4.Text:=zqry1.Fields[4].AsString;
 edt5.Text:=zqry1.Fields[5].AsString;
 dtp1.Date:=zqry1.Fields[6].AsDateTime;
 edt6.Text:=zqry1.Fields[7].AsString;
-edt7.Text:=zqry1.Fields[8].AsString;
+cbb1.Text:=zqry1.Fields[8].AsString;
 
 edt1.Enabled:=True;
 edt2.Enabled:=True;
@@ -197,8 +197,8 @@ edt3.Enabled:=True;
 edt4.Enabled:=True;
 edt5.Enabled:=True;
 edt6.Enabled:=True;
-edt7.Enabled:=True;
 dtp1.Enabled:=True;
+cbb1.Enabled:=True;
 
 btn1.Enabled:=False;
 btn2.Enabled:=False;

@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 181
-  Top = 290
+  Left = 188
+  Top = 156
   Width = 874
   Height = 554
   Caption = 'FormSISWA'
@@ -213,20 +213,13 @@ object Form1: TForm1
     Height = 21
     TabOrder = 12
   end
-  object edt11: TEdit
-    Left = 504
-    Top = 232
-    Width = 273
-    Height = 21
-    TabOrder = 13
-  end
   object btn1: TButton
     Left = 72
     Top = 272
     Width = 105
     Height = 41
     Caption = 'BARU'
-    TabOrder = 14
+    TabOrder = 13
     OnClick = btn1Click
   end
   object btn2: TButton
@@ -235,7 +228,7 @@ object Form1: TForm1
     Width = 105
     Height = 41
     Caption = 'SIMPAN'
-    TabOrder = 15
+    TabOrder = 14
     OnClick = btn2Click
   end
   object btn3: TButton
@@ -244,7 +237,7 @@ object Form1: TForm1
     Width = 105
     Height = 41
     Caption = 'EDIT'
-    TabOrder = 16
+    TabOrder = 15
     OnClick = btn3Click
   end
   object btn4: TButton
@@ -253,7 +246,7 @@ object Form1: TForm1
     Width = 105
     Height = 41
     Caption = 'HAPUS'
-    TabOrder = 17
+    TabOrder = 16
     OnClick = btn4Click
   end
   object btn5: TButton
@@ -262,7 +255,7 @@ object Form1: TForm1
     Width = 105
     Height = 41
     Caption = 'BATAL'
-    TabOrder = 18
+    TabOrder = 17
     OnClick = btn5Click
   end
   object dbgrd1: TDBGrid
@@ -271,7 +264,7 @@ object Form1: TForm1
     Width = 673
     Height = 169
     DataSource = ds1
-    TabOrder = 19
+    TabOrder = 18
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
@@ -285,8 +278,19 @@ object Form1: TForm1
     Width = 105
     Height = 41
     Caption = 'SHOW REPORT'
-    TabOrder = 20
+    TabOrder = 19
     OnClick = btn6Click
+  end
+  object cbb3: TComboBox
+    Left = 504
+    Top = 232
+    Width = 273
+    Height = 21
+    ItemHeight = 13
+    TabOrder = 20
+    Items.Strings = (
+      'aktif '
+      'tidak aktif')
   end
   object ds1: TDataSource
     DataSet = zqry1

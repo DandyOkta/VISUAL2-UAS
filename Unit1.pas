@@ -33,7 +33,6 @@ type
     edt8: TEdit;
     edt9: TEdit;
     edt10: TEdit;
-    edt11: TEdit;
     lbl11: TLabel;
     lbl12: TLabel;
     lbl13: TLabel;
@@ -50,6 +49,7 @@ type
     frxdbsiswa: TfrxDBDataset;
     frxsiswa: TfrxReport;
     btn6: TButton;
+    cbb3: TComboBox;
     procedure posisiawal;
     procedure bersih;
     procedure FormCreate(Sender: TObject);
@@ -85,6 +85,9 @@ edt7.Clear;
 edt8.Clear;
 edt9.Clear;
 edt10.Clear;
+cbb1.Text:='';
+cbb2.Text:='';
+cbb3.Text:='';
 end;
 
 procedure TForm1.posisiawal;
@@ -108,6 +111,7 @@ edt10.Enabled:=False;
 dtp1.Enabled:=False;
 cbb1.Enabled:=False;
 cbb2.Enabled:=False;
+cbb3.Enabled:=False;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -137,6 +141,7 @@ edt10.Enabled:=True;
 dtp1.Enabled:=True;
 cbb1.Enabled:=True;
 cbb2.Enabled:=True;
+cbb3.Enabled:=True;
 end;
 
 procedure TForm1.btn2Click(Sender: TObject);
@@ -181,13 +186,21 @@ if edt10.Text ='' then
 begin
   ShowMessage('NO HP KOSONG');
 end else
-if edt11.Text ='' then
+if cbb1.Text ='' then
 begin
-  ShowMessage('STATUS KOSONG');
+  ShowMessage('jenis kelamin belum dipilih');
+end else
+if cbb2.Text ='' then
+begin
+  ShowMessage('Jurusan Belum Dipilih');
+end else
+if cbb3.Text ='' then
+begin
+  ShowMessage('Status Belum Dipilih');
 end else
 begin
 zqry1.SQL.Clear;
-zqry1.SQL.Add('insert into siswa values("'+edt1.Text+'","'+edt2.Text+'","'+edt3.Text+'","'+edt4.Text+'","'+edt5.Text+'","'+FormatDateTime('yyyy/mm/dd',dtp1.Date)+'","'+cbb1.Text+'","'+edt6.Text+'","'+cbb2.Text+'","'+edt7.Text+'","'+edt8.Text+'","'+edt9.Text+'","'+edt10.Text+'","'+edt11.Text+'")');
+zqry1.SQL.Add('insert into siswa values("'+edt1.Text+'","'+edt2.Text+'","'+edt3.Text+'","'+edt4.Text+'","'+edt5.Text+'","'+FormatDateTime('yyyy/mm/dd',dtp1.Date)+'","'+cbb1.Text+'","'+edt6.Text+'","'+cbb2.Text+'","'+edt7.Text+'","'+edt8.Text+'","'+edt9.Text+'","'+edt10.Text+'","'+cbb3.Text+'")');
 zqry1.ExecSQL;
 
 zqry1.SQL.Clear;
@@ -212,7 +225,7 @@ end else
 begin
   ShowMessage('Data Berhasil Diupdate');
 zqry1.SQL.Clear;
-zqry1.SQL.Add('Update siswa set id="'+edt1.text+'",nis="'+edt2.Text+'",nama_siswa="'+edt3.Text+'",nik="'+edt4.Text+'",tempat_lahir="'+edt5.Text+'",tanggal_lahir="'+FormatDateTime('yyyy/mm/dd',dtp1.Date)+'",jenis_kelamin="'+cbb1.Text+'",tingkat_kelas="'+edt6.Text+'",jurusan="'+cbb2.text+'",wali_kelas="'+edt7.Text+'",alamat="'+edt8.Text+'",telp="'+edt9.Text+'",hp="'+edt10.Text+'",status="'+edt11.Text+'"where id = "'+edt1.text+'"');
+zqry1.SQL.Add('Update siswa set id="'+edt1.text+'",nis="'+edt2.Text+'",nama_siswa="'+edt3.Text+'",nik="'+edt4.Text+'",tempat_lahir="'+edt5.Text+'",tanggal_lahir="'+FormatDateTime('yyyy/mm/dd',dtp1.Date)+'",jenis_kelamin="'+cbb1.Text+'",tingkat_kelas="'+edt6.Text+'",jurusan="'+cbb2.text+'",wali_kelas="'+edt7.Text+'",alamat="'+edt8.Text+'",telp="'+edt9.Text+'",hp="'+edt10.Text+'",status="'+cbb3.text+'"where id = "'+edt1.text+'"');
 zqry1.ExecSQL;
 
 zqry1.SQL.Clear;
@@ -236,7 +249,7 @@ edt7.Text:=zqry1.Fields[9].AsString;
 edt8.Text:=zqry1.Fields[10].AsString;
 edt9.Text:=zqry1.Fields[11].AsString;
 edt10.Text:=zqry1.Fields[12].AsString;
-edt11.Text:=zqry1.Fields[13].AsString;
+cbb3.Text:=zqry1.Fields[13].AsString;
 
 edt1.Enabled:=True;
 edt2.Enabled:=True;
@@ -248,9 +261,9 @@ edt7.Enabled:=True;
 edt8.Enabled:=True;
 edt9.Enabled:=True;
 edt10.Enabled:=True;
-edt11.Enabled:=True;
 cbb1.Enabled:=True;
 cbb2.Enabled:=True;
+cbb3.Enabled:=True;
 dtp1.Enabled:=True;
 
 btn1.Enabled:=False;

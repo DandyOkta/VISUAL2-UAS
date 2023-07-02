@@ -36,10 +36,11 @@ type
     lbl8: TLabel;
     lbl9: TLabel;
     cbb2: TComboBox;
-    edt8: TEdit;
     lbl10: TLabel;
     frxdbORTU: TfrxDBDataset;
     frxORTU: TfrxReport;
+    cbb3: TComboBox;
+    btn6: TButton;
     procedure posisiawal;
     procedure bersih;
     procedure FormCreate(Sender: TObject);
@@ -49,6 +50,7 @@ type
     procedure btn4Click(Sender: TObject);
     procedure dbgrd1CellClick(Column: TColumn);
     procedure btn5Click(Sender: TObject);
+    procedure btn6Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -71,7 +73,9 @@ edt4.Clear;
 edt5.Clear;
 edt6.Clear;
 edt7.Clear;
-edt8.Clear;
+cbb1.Text:='';
+cbb2.Text:='';
+cbb3.Text:='';
 end;
 
 procedure TForm3.posisiawal;
@@ -88,9 +92,9 @@ edt4.Enabled:=False;
 edt5.Enabled:=False;
 edt6.Enabled:=False;
 edt7.Enabled:=False;
-edt8.Enabled:=False;
 cbb1.Enabled:=False;
 cbb2.Enabled:=False;
+cbb3.Enabled:=False;
 end;
 
 procedure TForm3.FormCreate(Sender: TObject);
@@ -113,9 +117,9 @@ edt4.Enabled:=True;
 edt5.Enabled:=True;
 edt6.Enabled:=True;
 edt7.Enabled:=True;
-edt8.Enabled:=True;
 cbb1.Enabled:=True;
 cbb2.Enabled:=True;
+cbb3.Enabled:=True;
 end;
 
 procedure TForm3.btn2Click(Sender: TObject);
@@ -126,35 +130,43 @@ begin
 end else
 if edt2.Text ='' then
 begin
-  ShowMessage('NISN KOSONG');
+  ShowMessage('NIK KOSONG');
 end else
 if edt3.Text ='' then
 begin
-  ShowMessage('NAMA KOSONG');
+  ShowMessage('NAMA ORTU KOSONG');
 end else
 if edt4.Text ='' then
 begin
-  ShowMessage('NIK KOSONG');
+  ShowMessage('PENDIDIKAN KOSONG');
 end else
 if edt5.Text ='' then
 begin
-  ShowMessage('TEMPAT LAHIR KOSONG');
+  ShowMessage('PEKERJAAN KOSONG');
 end else
 if edt6.Text ='' then
 begin
-  ShowMessage('TINGKAT KELAS KOSONG');
+  ShowMessage('TELP KOSONG');
 end else
 if edt7.Text ='' then
 begin
-  ShowMessage('WALI KELAS KOSONG');
-end else
-if edt8.Text ='' then
-begin
   ShowMessage('ALAMAT KOSONG');
+end else
+if cbb1.Text ='' then
+begin
+  ShowMessage('AGAMA TIDAK DIPILIH');
+end else
+if cbb2.Text ='' then
+begin
+  ShowMessage('JENIS KELAMIN TIDAK DIPILIH');
+end else
+if cbb3.Text ='' then
+begin
+  ShowMessage('STATUS TIDAK DIPILIH');
 end else
 begin
 zqry1.SQL.Clear;
-zqry1.SQL.Add('insert into orang_tua values("'+edt1.Text+'","'+edt2.Text+'","'+edt3.Text+'","'+edt4.Text+'","'+edt5.Text+'","'+edt6.Text+'","'+edt7.Text+'","'+cbb2.Text+'","'+cbb1.Text+'","'+edt8.Text+'")');
+zqry1.SQL.Add('insert into orang_tua values("'+edt1.Text+'","'+edt2.Text+'","'+edt3.Text+'","'+edt4.Text+'","'+edt5.Text+'","'+edt6.Text+'","'+edt7.Text+'","'+cbb2.Text+'","'+cbb1.Text+'","'+cbb3.Text+'")');
 zqry1.ExecSQL;
 
 zqry1.SQL.Clear;
@@ -179,7 +191,7 @@ end else
 begin
   ShowMessage('Data Berhasil Diupdate');
 zqry1.SQL.Clear;
-zqry1.SQL.Add('Update orang_tua set id="'+edt1.text+'",nik="'+edt2.Text+'",nama="'+edt3.Text+'",pendidikan="'+edt4.Text+'",pekerjaan="'+edt5.Text+'",telp="'+edt6.Text+'",alamat="'+edt7.Text+'",agama="'+cbb1.text+'",jk="'+cbb2.Text+'",status="'+edt8.Text+'" where id = "'+edt1.text+'"');
+zqry1.SQL.Add('Update orang_tua set id="'+edt1.text+'",nik="'+edt2.Text+'",nama="'+edt3.Text+'",pendidikan="'+edt4.Text+'",pekerjaan="'+edt5.Text+'",telp="'+edt6.Text+'",alamat="'+edt7.Text+'",agama="'+cbb1.text+'",jk="'+cbb2.Text+'",status="'+cbb3.Text+'" where id = "'+edt1.text+'"');
 zqry1.ExecSQL;
 
 zqry1.SQL.Clear;
@@ -219,7 +231,7 @@ edt6.Text:=zqry1.Fields[5].AsString;
 edt7.Text:=zqry1.Fields[6].AsString;
 cbb2.Text:=zqry1.Fields[7].AsString;
 cbb1.Text:=zqry1.Fields[8].AsString;
-edt8.Text:=zqry1.Fields[9].AsString;
+cbb3.Text:=zqry1.Fields[9].AsString;
 
 edt1.Enabled:=True;
 edt2.Enabled:=True;
@@ -228,9 +240,9 @@ edt4.Enabled:=True;
 edt5.Enabled:=True;
 edt6.Enabled:=True;
 edt7.Enabled:=True;
-edt8.Enabled:=True;
 cbb1.Enabled:=True;
 cbb2.Enabled:=True;
+cbb3.Enabled:=True;
 
 btn1.Enabled:=False;
 btn2.Enabled:=False;
@@ -242,6 +254,11 @@ end;
 procedure TForm3.btn5Click(Sender: TObject);
 begin
 posisiawal;
+end;
+
+procedure TForm3.btn6Click(Sender: TObject);
+begin
+frxORTU.ShowReport();
 end;
 
 end.

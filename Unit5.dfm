@@ -112,20 +112,13 @@ object Form5: TForm5
     Height = 21
     TabOrder = 5
   end
-  object edt7: TEdit
-    Left = 80
-    Top = 240
-    Width = 273
-    Height = 21
-    TabOrder = 6
-  end
   object btn1: TButton
     Left = 24
     Top = 280
     Width = 105
     Height = 41
     Caption = 'BARU'
-    TabOrder = 7
+    TabOrder = 6
     OnClick = btn1Click
   end
   object btn2: TButton
@@ -134,7 +127,7 @@ object Form5: TForm5
     Width = 105
     Height = 41
     Caption = 'SIMPAN'
-    TabOrder = 8
+    TabOrder = 7
     OnClick = btn2Click
   end
   object btn3: TButton
@@ -143,7 +136,7 @@ object Form5: TForm5
     Width = 105
     Height = 41
     Caption = 'EDIT'
-    TabOrder = 9
+    TabOrder = 8
     OnClick = btn3Click
   end
   object btn4: TButton
@@ -152,7 +145,7 @@ object Form5: TForm5
     Width = 105
     Height = 41
     Caption = 'HAPUS'
-    TabOrder = 10
+    TabOrder = 9
     OnClick = btn4Click
   end
   object btn5: TButton
@@ -161,7 +154,7 @@ object Form5: TForm5
     Width = 105
     Height = 41
     Caption = 'BATAL'
-    TabOrder = 11
+    TabOrder = 10
     OnClick = btn5Click
   end
   object dbgrd1: TDBGrid
@@ -170,7 +163,7 @@ object Form5: TForm5
     Width = 337
     Height = 169
     DataSource = ds1
-    TabOrder = 12
+    TabOrder = 11
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
@@ -185,7 +178,7 @@ object Form5: TForm5
     Height = 21
     Date = 45102.908161145830000000
     Time = 45102.908161145830000000
-    TabOrder = 13
+    TabOrder = 12
   end
   object btn6: TButton
     Left = 624
@@ -193,8 +186,19 @@ object Form5: TForm5
     Width = 81
     Height = 41
     Caption = 'SHOW REPORT'
-    TabOrder = 14
+    TabOrder = 13
     OnClick = btn6Click
+  end
+  object cbb1: TComboBox
+    Left = 80
+    Top = 240
+    Width = 273
+    Height = 21
+    ItemHeight = 13
+    TabOrder = 14
+    Items.Strings = (
+      'Aktif '
+      'Tidak Aktif')
   end
   object ds1: TDataSource
     DataSet = zqry1

@@ -34,11 +34,11 @@ type
     zqry1: TZQuery;
     con1: TZConnection;
     lbl8: TLabel;
-    edt8: TEdit;
     lbl9: TLabel;
     btn6: TButton;
     frxdbwalikelas: TfrxDBDataset;
     frxwalikelas: TfrxReport;
+    cbb2: TComboBox;
     procedure posisiawal;
     procedure bersih;
     procedure btn2Click(Sender: TObject);
@@ -73,8 +73,8 @@ edt4.Clear;
 edt5.Clear;
 edt6.Clear;
 edt7.Clear;
-edt8.Clear;
 cbb1.Text:='';
+cbb2.Text:='';
 end;
 
 procedure TForm2.posisiawal;
@@ -91,8 +91,8 @@ edt4.Enabled:=False;
 edt5.Enabled:=False;
 edt6.Enabled:=False;
 edt7.Enabled:=False;
-edt8.Enabled:=False;
 cbb1.Enabled:=False;
+cbb2.Enabled:=False;
 end;
 
 procedure TForm2.btn2Click(Sender: TObject);
@@ -103,7 +103,7 @@ begin
 end else
 if edt2.Text ='' then
 begin
-  ShowMessage('NISN KOSONG');
+  ShowMessage('NIK KOSONG');
 end else
 if edt3.Text ='' then
 begin
@@ -111,23 +111,31 @@ begin
 end else
 if edt4.Text ='' then
 begin
-  ShowMessage('NIK KOSONG');
+  ShowMessage('PENDIDIKAN KOSONG');
 end else
 if edt5.Text ='' then
 begin
-  ShowMessage('TEMPAT LAHIR KOSONG');
+  ShowMessage('TELP KOSONG');
 end else
 if edt6.Text ='' then
 begin
-  ShowMessage('TINGKAT KELAS KOSONG');
+  ShowMessage('ALAMAT KOSONG');
 end else
 if edt7.Text ='' then
 begin
-  ShowMessage('WALI KELAS KOSONG');
+  ShowMessage('MATPEL KOSONG');
+end else
+if cbb1.Text ='' then
+begin
+  ShowMessage('JENIS KELAMIN TIDAK DIPILIH');
+end else
+if cbb2.Text ='' then
+begin
+  ShowMessage('STATUS TIDAK DIPILIH');
 end else
 begin
 zqry1.SQL.Clear;
-zqry1.SQL.Add('insert into wali_kelas values("'+edt1.Text+'","'+edt2.Text+'","'+edt3.Text+'","'+cbb1.Text+'","'+edt4.Text+'","'+edt5.Text+'","'+edt6.Text+'","'+edt7.Text+'","'+edt8.Text+'")');
+zqry1.SQL.Add('insert into wali_kelas values("'+edt1.Text+'","'+edt2.Text+'","'+edt3.Text+'","'+cbb1.Text+'","'+edt4.Text+'","'+edt5.Text+'","'+edt6.Text+'","'+edt7.Text+'","'+cbb2.Text+'")');
 zqry1.ExecSQL;
 
 zqry1.SQL.Clear;
@@ -152,7 +160,7 @@ end else
 begin
   ShowMessage('Data Berhasil Diupdate');
 zqry1.SQL.Clear;
-zqry1.SQL.Add('Update wali_kelas set id="'+edt1.text+'",nip="'+edt2.Text+'",nama="'+edt3.Text+'",jk="'+cbb1.Text+'",pendidikan="'+edt4.Text+'",telp="'+edt5.Text+'",alamat="'+edt6.Text+'",matpel="'+edt7.Text+'",status="'+edt8.Text+'" where id = "'+edt1.text+'"');
+zqry1.SQL.Add('Update wali_kelas set id="'+edt1.text+'",nip="'+edt2.Text+'",nama="'+edt3.Text+'",jk="'+cbb1.Text+'",pendidikan="'+edt4.Text+'",telp="'+edt5.Text+'",alamat="'+edt6.Text+'",matpel="'+edt7.Text+'",status="'+cbb2.Text+'" where id = "'+edt1.text+'"');
 zqry1.ExecSQL;
 
 zqry1.SQL.Clear;
@@ -191,7 +199,7 @@ edt4.Text:=zqry1.Fields[4].AsString;
 edt5.Text:=zqry1.Fields[5].AsString;
 edt6.Text:=zqry1.Fields[6].AsString;
 edt7.Text:=zqry1.Fields[7].AsString;
-edt8.Text:=zqry1.Fields[8].AsString;
+cbb2.Text:=zqry1.Fields[8].AsString;
 
 edt1.Enabled:=True;
 edt2.Enabled:=True;
@@ -200,8 +208,8 @@ edt4.Enabled:=True;
 edt5.Enabled:=True;
 edt6.Enabled:=True;
 edt7.Enabled:=True;
-edt8.Enabled:=True;
 cbb1.Enabled:=True;
+cbb2.Enabled:=True;
 
 btn1.Enabled:=False;
 btn2.Enabled:=False;
@@ -225,8 +233,8 @@ edt4.Enabled:=True;
 edt5.Enabled:=True;
 edt6.Enabled:=True;
 edt7.Enabled:=True;
-edt8.Enabled:=True;
 cbb1.Enabled:=True;
+cbb2.Enabled:=True;
 end;
 
 procedure TForm2.FormCreate(Sender: TObject);

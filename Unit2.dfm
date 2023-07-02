@@ -1,6 +1,6 @@
 object Form2: TForm2
-  Left = 177
-  Top = 124
+  Left = 194
+  Top = 149
   Width = 876
   Height = 515
   Caption = 'FormWaliKelas'
@@ -196,21 +196,25 @@ object Form2: TForm2
     TitleFont.Style = []
     OnCellClick = dbgrd1CellClick
   end
-  object edt8: TEdit
-    Left = 496
-    Top = 96
-    Width = 273
-    Height = 21
-    TabOrder = 14
-  end
   object btn6: TButton
     Left = 664
     Top = 232
     Width = 89
     Height = 41
     Caption = 'SHOW REPORT'
-    TabOrder = 15
+    TabOrder = 14
     OnClick = btn6Click
+  end
+  object cbb2: TComboBox
+    Left = 496
+    Top = 96
+    Width = 273
+    Height = 21
+    ItemHeight = 13
+    TabOrder = 15
+    Items.Strings = (
+      'Aktif '
+      'Tidak Aktif')
   end
   object ds1: TDataSource
     DataSet = zqry1
