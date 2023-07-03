@@ -1,8 +1,8 @@
 object Form5: TForm5
-  Left = 231
-  Top = 155
+  Left = 246
+  Top = 193
   Width = 748
-  Height = 421
+  Height = 377
   Caption = 'FormRIWAYATPOIN'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET

@@ -91,15 +91,19 @@ procedure TForm4.btn2Click(Sender: TObject);
 begin
 if edt1.Text ='' then
 begin
-  ShowMessage('ID KOSONG');
+  ShowMessage('ID KELAS KOSONG');
 end else
 if edt2.Text ='' then
 begin
-  ShowMessage('NISN KOSONG');
+  ShowMessage('NAMA KELAS KOSONG');
 end else
 if edt3.Text ='' then
 begin
-  ShowMessage('NAMA KOSONG');
+  ShowMessage('JENIS KELAS KOSONG');
+end else
+if cbb1.Text ='' then
+begin
+  ShowMessage('JURUSAN KOSONG');
 end else
 begin
 zqry1.SQL.Clear;
@@ -115,14 +119,9 @@ end;
 end;
 procedure TForm4.btn3Click(Sender: TObject);
 begin
-if(edt1.Text='') or (edt2.Text='') or (edt3.Text='') then
+if(edt1.Text='') or (edt2.Text='') or (edt3.Text='') or (cbb1.Text='') then
 begin
   ShowMessage('INPUTAN WAJIB DIISI');
-end else
-if edt2.Text = zqry1.Fields[1].AsString then
-begin
-  ShowMessage('DATA TIDAK ADA PERUBAHAN');
-  posisiawal;
 end else
 begin
   ShowMessage('Data Berhasil Diupdate');

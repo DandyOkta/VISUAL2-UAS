@@ -152,11 +152,6 @@ if(edt1.Text='') or (edt2.Text='') or (edt3.Text='') or (edt4.Text='') or (edt5.
 begin
   ShowMessage('INPUTAN WAJIB DIISI');
 end else
-if edt2.Text = zqry1.Fields[1].AsString then
-begin
-  ShowMessage('DATA TIDAK ADA PERUBAHAN');
-  posisiawal;
-end else
 begin
   ShowMessage('Data Berhasil Diupdate');
 zqry1.SQL.Clear;
