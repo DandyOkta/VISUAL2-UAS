@@ -1,6 +1,6 @@
 object Form9: TForm9
-  Left = 185
-  Top = 198
+  Left = 183
+  Top = 189
   Width = 870
   Height = 450
   Caption = 'FormMENU'
